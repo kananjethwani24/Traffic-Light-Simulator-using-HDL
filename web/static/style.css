@@ -1,0 +1,319 @@
+:root {
+    --bg-color: #0b0b14;
+    --panel-bg: #14141f;
+    --text-color: #00f0ff;
+    --accent-color: #ff0055;
+    --grid-color: rgba(0, 240, 255, 0.1);
+    --lamp-off: #333;
+    --lamp-red: #ff3333;
+    --lamp-yellow: #ffdd33;
+    --lamp-green: #33ff33;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--text-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-shadow: 0 0 10px var(--text-color);
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.intersection-panel,
+.dashboard-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--grid-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Intersection Drawing */
+.intersection {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 19px,
+            var(--grid-color) 20px),
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 19px,
+            var(--grid-color) 20px);
+    margin-top: 20px;
+}
+
+.road {
+    position: absolute;
+    background: #222;
+    box-shadow: 0 0 10px #000 inset;
+}
+
+.road-ns {
+    width: 60px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 2px dashed #444;
+    border-right: 2px dashed #444;
+}
+
+.road-ew {
+    height: 60px;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 2px dashed #444;
+    border-bottom: 2px dashed #444;
+}
+
+.light {
+    position: absolute;
+    background: #000;
+    border: 1px solid #555;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    /* Vertical lights */
+    gap: 3px;
+    width: 15px;
+}
+
+.light-n {
+    top: 10%;
+    left: 52%;
+}
+
+/* North facing South */
+.light-s {
+    bottom: 10%;
+    right: 52%;
+}
+
+/* South facing North */
+.light-e {
+    right: 10%;
+    top: 40%;
+}
+
+/* East facing West */
+.light-w {
+    left: 10%;
+    bottom: 42%;
+}
+
+/* West facing East */
+
+.lamp {
+    width: 15px;
+    height: 15px;
+    background: var(--lamp-off);
+    border-radius: 50%;
+}
+
+.light.red .lamp.red {
+    background: var(--lamp-red);
+    box-shadow: 0 0 15px var(--lamp-red);
+}
+
+.light.yellow .lamp.yellow {
+    background: var(--lamp-yellow);
+    box-shadow: 0 0 15px var(--lamp-yellow);
+}
+
+.light.green .lamp.green {
+    background: var(--lamp-green);
+    box-shadow: 0 0 15px var(--lamp-green);
+}
+
+/* Dashboard */
+.btn-emergency {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.3s;
+}
+
+.btn-emergency:hover {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+.btn-emergency.active {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 0 25px var(--accent-color);
+}
+
+/* Timers */
+.timer {
+    position: absolute;
+    color: var(--text-color);
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--text-color);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border: 1px solid var(--grid-color);
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.timer-ns {
+    top: 50%;
+    left: 40%;
+    /* Offset to not block road */
+    transform: translate(-50%, -50%);
+}
+
+.timer-ew {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Sliders */
+.slider-control {
+    margin-bottom: 15px;
+}
+
+.slider-control label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.slider-control input[type=range] {
+    width: 100%;
+    background: transparent;
+    -webkit-appearance: none;
+}
+
+.slider-control input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--text-color);
+    cursor: pointer;
+    margin-top: -6px;
+    box-shadow: 0 0 10px var(--text-color);
+}
+
+.slider-control input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: #333;
+    border-radius: 2px;
+}
+
+/* Navigation */
+.nav-bar {
+    margin-right: 20px;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: var(--text-color);
+    margin-left: 20px;
+    font-weight: bold;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.nav-bar a:hover,
+.nav-bar a.active {
+    opacity: 1;
+    text-shadow: 0 0 10px var(--text-color);
+}
+
+/* Data Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.data-table th,
+.data-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.data-table th {
+    color: var(--accent-color);
+    text-transform: uppercase;
+}
+
+/* Metrics */
+.metric-box {
+    background: rgba(0, 240, 255, 0.05);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--text-color);
+}
+
+.metric-box h3 {
+    margin: 0 0 5px 0;
+    font-size: 0.8em;
+    color: #aaa;
+}
+
+.metric-value {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.setting-group {
+    margin-bottom: 20px;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #aaa;
+}
+
+.setting-group input[type=number] {
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 5px;
+    width: 60px;
+}

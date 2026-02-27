@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Controller - Cyberpunk Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>TRAFFIC_CONTROLLER::V1.0</h1>
+            <nav class="nav-bar">
+                <a href="/">HOME</a>
+                <a href="/dashboard" class="active">DASHBOARD</a>
+                <a href="/analytics">ANALYTICS</a>
+                <a href="/simulation">SIMULATION</a>
+                <a href="/settings">SETTINGS</a>
+            </nav>
+            <div class="status-bar">SYSTEM STATUS: <span id="sys-status">ONLINE</span></div>
+        </header>
+
+        <div class="main-grid">
+            <!-- Intersection Visualization -->
+            <div class="intersection-panel">
+                <h2>INTERSECTION_VIEW</h2>
+                <div class="intersection">
+                    <div class="road road-ns"></div>
+                    <div class="road road-ew"></div>
+
+                    <!-- Countdown Timers -->
+                    <div class="timer timer-ns" id="timer-ns">00</div>
+                    <div class="timer timer-ew" id="timer-ew">00</div>
+
+                    <div class="light light-n" id="light-n">
+                        <div class="lamp red"></div>
+                        <div class="lamp yellow"></div>
+                        <div class="lamp green"></div>
+                    </div>
+                    <div class="light light-s" id="light-s">
+                        <div class="lamp red"></div>
+                        <div class="lamp yellow"></div>
+                        <div class="lamp green"></div>
+                    </div>
+                    <div class="light light-e" id="light-e">
+                        <div class="lamp red"></div>
+                        <div class="lamp yellow"></div>
+                        <div class="lamp green"></div>
+                    </div>
+                    <div class="light light-w" id="light-w">
+                        <div class="lamp red"></div>
+                        <div class="lamp yellow"></div>
+                        <div class="lamp green"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard-panel">
+                <div class="panel-section">
+                    <h2>TRAFFIC_DENSITY (GREEN DURATION)</h2>
+                    <div class="slider-control">
+                        <label>NORTH-SOUTH: <span id="val-ns">10</span>s</label>
+                        <input type="range" id="slider-ns" min="5" max="30" value="10" onchange="updateConfig()">
+                    </div>
+                    <div class="slider-control">
+                        <label>EAST-WEST: <span id="val-ew">10</span>s</label>
+                        <input type="range" id="slider-ew" min="5" max="30" value="10" onchange="updateConfig()">
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2>EMERGENCY_OVERRIDE</h2>
+                    <div class="controls">
+                        <button id="btn-emg-north" class="btn-emergency" onclick="toggleEmergency('north')">EMG
+                            NORTH</button>
+                        <button id="btn-emg-south" class="btn-emergency" onclick="toggleEmergency('south')">EMG
+                            SOUTH</button>
+                        <button id="btn-emg-east" class="btn-emergency" onclick="toggleEmergency('east')">EMG
+                            EAST</button>
+                        <button id="btn-emg-west" class="btn-emergency" onclick="toggleEmergency('west')">EMG
+                            WEST</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2>TELEMETRY</h2>
+                    <canvas id="timerChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

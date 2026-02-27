@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Verilog/Icarus Verilog
+*.vcd
+traffic_light_sim
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+.git/
+# In case the user has other project files
+__MACOSX/

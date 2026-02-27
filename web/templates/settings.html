@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Traffic Light Controller</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>SYSTEM_CONFIG</h1>
+            <nav class="nav-bar">
+                <a href="/">HOME</a>
+                <a href="/dashboard">DASHBOARD</a>
+                <a href="/analytics">ANALYTICS</a>
+                <a href="/simulation">SIMULATION</a>
+                <a href="/settings" class="active">SETTINGS</a>
+            </nav>
+        </header>
+
+        <div class="dashboard-panel">
+            <div class="panel-section">
+                <h2>ADVANCED_PARAMETERS</h2>
+                <div class="setting-group">
+                    <label>YELLOW_LIGHT_DURATION (s)</label>
+                    <input type="number" id="yellow-dur" value="3" min="1" max="5">
+                </div>
+                <div class="setting-group">
+                    <label>SIMULATION_SPEED (x)</label>
+                    <input type="range" min="1" max="5" value="1" id="sim-speed">
+                    <span id="speed-val">1x</span>
+                </div>
+                <button class="btn-emergency" onclick="saveSettings()">SAVE_CONFIG</button>
+            </div>
+
+            <div class="panel-section">
+                <h2>DANGER_ZONE</h2>
+                <button class="btn-emergency" style="border-color: red; color: red;"
+                    onclick="resetSystem()">RESET_SYSTEM</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('sim-speed').oninput = function () {
+            document.getElementById('speed-val').innerText = this.value + 'x';
+        }
+
+        function saveSettings() {
+            // Mock functionality for demo
+            alert('CONFIGURATION SAVED');
+        }
+
+        function resetSystem() {
+            if (confirm('CONFIRM SYSTEM RESET?')) {
+                alert('SYSTEM RESETTING...');
+                window.location.href = '/';
+            }
+        }
+    </script>
+</body>
+
+</html>
